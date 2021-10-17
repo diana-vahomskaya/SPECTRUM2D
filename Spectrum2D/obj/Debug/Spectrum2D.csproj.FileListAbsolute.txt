@@ -1,0 +1,10 @@
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\bin\Debug\Spectrum2D.exe.config
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\bin\Debug\Spectrum2D.exe
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\bin\Debug\Spectrum2D.pdb
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\obj\Debug\Spectrum2D.csproj.AssemblyReference.cache
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\obj\Debug\Spectrum2D.Form1.resources
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\obj\Debug\Spectrum2D.Properties.Resources.resources
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\obj\Debug\Spectrum2D.csproj.GenerateResource.cache
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\obj\Debug\Spectrum2D.csproj.CoreCompileInputs.cache
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\obj\Debug\Spectrum2D.exe
+C:\Users\Diana\Desktop\Spectrum2D\Spectrum2D\obj\Debug\Spectrum2D.pdb
