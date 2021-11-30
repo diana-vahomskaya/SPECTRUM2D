@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -49,6 +51,212 @@ namespace Spectrum2D
         {
             radioCreate.Checked = true;
         }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            spectreBuffer = new Complex[spectreWidth, spectreHeight];
+
+            for (int i = 0; i < spectre.GetLength(0); i++)
+            {
+                for (int j = 0; j < spectre.GetLength(1); j++)
+                {
+                    spectreBuffer[i, j] = spectre[i, j];
+                }
+            }
+
+            filtered = true;
+            filterPercent = Convert.ToDouble(txtFilterPercent.Text) / 100;
+
+            // подсчет энергии спектра
+            double energySpectreFull = 0;
+
+            for (int i = 0; i < spectre.GetLength(0); i++)
+            {
+                for (int j = 0; j < spectre.GetLength(1); j++)
+                {
+                    energySpectreFull += Math.Pow(spectre[i, j].Magnitude, 2);
+                }
+            }
+
+            double energy = 0;
+            int radiusLast = (int)(spectreHeight / 2 * 1.4);
+
+            for (int radius = 1; radius < spectreWidth / 2; radius++)
+            {
+                for (int i = 0; i < spectreWidth / 2; i++)
+                {
+                    for (int j = 0; j < spectreHeight / 2; j++)
+                    {
+                        if (Math.Sqrt(i * i + j * j) <= radius)
+                        {
+                            energy += Math.Pow(spectre[i, j].Magnitude, 2);
+                            energy += Math.Pow(spectre[spectreWidth - 1 - i, j].Magnitude, 2);
+                            energy += Math.Pow(spectre[spectreWidth - 1 - i, spectreHeight - 1 - j].Magnitude, 2);
+                            energy += Math.Pow(spectre[i, spectreHeight - 1 - j].Magnitude, 2);
+                        }
+                    }
+                }
+
+                if (energy < energySpectreFull * filterPercent)
+                {
+                    energy = 0;
+                }
+                else
+                {
+                    radiusLast = radius;
+                    break;
+                }
+            }
+
+            buf = new Complex(0, 0);
+
+            for (int i = 0; i < spectreWidth / 2; i++)
+            {
+                for (int j = 0; j < spectreHeight / 2; j++)
+                {
+                    if (Math.Sqrt(i * i + j * j) > radiusLast)
+                    {
+                        spectreBuffer[i, j] = spectre[i, j] = buf;
+                        spectreBuffer[spectreWidth - 1 - i, j] = spectre[spectreWidth - 1 - i, j] = buf;
+                        spectreBuffer[spectreWidth - 1 - i, spectreHeight - 1 - j] = spectre[spectreWidth - 1 - i, spectreHeight - 1 - j] = buf;
+                        spectreBuffer[i, spectreHeight - 1 - j] = spectre[i, spectreHeight - 1 - j] = buf;
+                    }
+                }
+            }
+
+            DrawMatrix(SPECTR, ConvertToDraw(spectreBuffer, spectreHeight, spectreWidth), spectreHeight, spectreWidth);
+            DrawRadius(SPECTR, radiusLast, spectre.GetLength(0), spectre.GetLength(1));
+
+            // итерация по строкам матрицы
+            for (int i = 0; i < spectreHeight; i++)
+            {
+                for (int j = 0; j < spectreWidth; j++)
+                {
+                    line[j] = spectre[j, i];
+                }
+
+                line = Fourea(line, spectreWidth, 1);
+
+                for (int j = 0; j < spectreWidth; j++)
+                {
+                    spectre[j, i] = line[j];
+                }
+            }
+
+            // итерация по столбцам матрицы
+            for (int j = 0; j < spectreWidth; j++)
+            {
+                for (int i = 0; i < spectreHeight; i++)
+                {
+                    column[i] = spectre[j, i];
+                }
+
+                column = Fourea(column, spectreHeight, 1);
+
+                for (int i = 0; i < spectreHeight; i++)
+                {
+                    spectre[j, i] = column[i];
+                }
+            }
+
+            double sko = 0;
+            double en = 0;
+            for (int i = 0; i < spectreWidth; i++)
+                for (int j = 0; j < spectreHeight; j++)
+                {
+                    en += interpolatePicture[i, j] * interpolatePicture[i, j];
+                }
+
+            for (int i = 0; i < spectreWidth; i++)
+            {
+                for (int j = 0; j < spectreHeight; j++)
+                {
+                    sko += Math.Pow(interpolatePicture[i, j] - spectre[i, j].Magnitude, 2)/en ;
+                }
+            }
+            sko = Math.Sqrt(sko);
+            labelSKO.Text = (sko).ToString("f5");
+
+            //DrawMatrix(pcbFilter, filteredPicture, spectreHeight, spectreWidth);
+            DrawMatrix(RESTOR_IMAGE, ConvertToDraw(spectre, spectreHeight, spectreWidth), spectreHeight, spectreWidth);
+        }
+        public void DrawRadius(PictureBox pcb, float radius, float width, float height)
+        {
+            if (filterPercent < 1)
+            {
+                Graphics g = Graphics.FromImage(pcb.Image);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                Pen pen = new Pen(Color.Red, 2);
+
+                g.DrawEllipse(pen, -radius, -radius, 2 * radius, 2 * radius);
+                g.DrawEllipse(pen, -radius, height - radius, 2 * radius, 2 * radius);
+                g.DrawEllipse(pen, width - radius, -radius, 2 * radius, 2 * radius);
+                g.DrawEllipse(pen, width - radius, height - radius, 2 * radius, 2 * radius);
+            }
+        }
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            filtered = false;
+
+            OpenFileDialog uploadPic = new OpenFileDialog
+            {
+                Filter = "Файлы изображений|*.bmp;*.jpg;*.png",
+                InitialDirectory = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\"))
+            };
+
+            if (uploadPic.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    uploaded = Image.FromFile(uploadPic.FileName);
+                }
+                catch
+                {
+                    MessageBox.Show("Error");
+                    return;
+                }
+            }
+
+            //pcbInitial.Image = uploaded;
+
+            picWidth = uploaded.Width;
+            picHeight = uploaded.Height;
+
+            picture = new double[picWidth, picHeight];
+
+            Bitmap bitmap = new Bitmap(uploaded);
+
+            for (int i = 0; i < picWidth; i++)
+            {
+                for (int j = 0; j < picHeight; j++)
+                {
+                    picture[i, j] = 1.0 / 3.0 / 255.0 * (bitmap.GetPixel(i, j).R +
+                                                         bitmap.GetPixel(i, j).G +
+                                                         bitmap.GetPixel(i, j).B);
+                }
+            }
+
+            txtWidth.Text = Convert.ToString(picWidth);
+            txtHeight.Text = Convert.ToString(picHeight);
+
+            DrawMatrix(PICTURE, picture, picHeight, picWidth);
+
+            btnSetNoise.Enabled = true;
+        }
+
+        private void radioUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            btnInitial.Enabled = !radioUpload.Checked;
+        }
+
+        private void radioCreate_CheckedChanged(object sender, EventArgs e)
+        {
+            btnUpload.Enabled = !radioCreate.Checked;
+        }
+
+
+
         /// <summary>
         /// Получает значение двумерного гауссова купола в указанной точке.
         /// </summary>
@@ -80,33 +288,34 @@ namespace Spectrum2D
             picture = new double[picWidth, picHeight];
             noisedPicture = new double[picWidth, picHeight];
 
-            for (int k = 0; k < amount; k++)
+            for (int k = 0; k < amount; k++) //цикл по количеству куполов
             {
-                amp = GetRandom(ampMin, ampMax);
-                dispX = GetRandom(dispMin, dispMax);
-                dispY = GetRandom(dispMin, dispMax);
-                centerX = (int)(rand.NextDouble() * picWidth);
-                centerY = (int)(rand.NextDouble() * picHeight);
+                amp = GetRandom(ampMin, ampMax); // рандомные амплитуды по промежутку
+                dispX = GetRandom(dispMin, dispMax);// рандомные дисперсии по оси х по промежутку
+                dispY = GetRandom(dispMin, dispMax);// рандомные дисперсии по оси у по промежутку
+                centerX = (int)(rand.NextDouble() * picWidth); //рандомные центры гауссовых куполов по ширине 
+                centerY = (int)(rand.NextDouble() * picHeight);//рандомные центры гауссовых куполов по высоте 
 
-                for (int i = 0; i < picWidth; i++)
+                for (int i = 0; i < picWidth; i++) //цикл по ширине
                 {
-                    for (int j = 0; j < picHeight; j++)
+                    for (int j = 0; j < picHeight; j++) //цикл по высоте
                     {
-                        picture[i, j] += GaussSignal(amp, dispX, centerX, dispY, centerY, i, j);
+                        picture[i, j] += GaussSignal(amp, dispX, centerX, dispY, centerY, i, j); //двойнй массив хранения значений по высоте и ширине, матрица
                     }
                 }
             }
 
-            DrawMatrix(PICTURE, picture, picHeight, picWidth);
-
+            DrawMatrix(PICTURE, picture, picHeight, picWidth); //функция отрисовки матрицы
+            btnSetNoise.Enabled = true;
         }
 
         private void btnSetNoise_Click(object sender, EventArgs e)
         {
-            noisePercent = Convert.ToDouble(txtNoisePercent.Text) / 100;
+            noisePercent = Convert.ToDouble(txtNoisePercent.Text) / 100; //процент шума
 
-            noisedPicture = SetNoise(picWidth, picHeight, picture, noisePercent);
-            DrawMatrix(PICTURE_SHUM, noisedPicture, picHeight, picWidth);
+            noisedPicture = SetNoise(picWidth, picHeight, picture, noisePercent); //функция наложения шума
+            DrawMatrix(PICTURE_SHUM, noisedPicture, picHeight, picWidth); //функция отрисовки шумовой матрицы
+            btnStretch.Enabled = true;
 
         }
         private void btnStretch_Click(object sender, EventArgs e)
@@ -134,11 +343,12 @@ namespace Spectrum2D
             // проводим интерполяцию
             interpolatePicture = InterpolateMatrix(noisedPicture, spectreWidth, spectreHeight);
 
-            DrawMatrix(PICTURE, interpolatePicture, spectreHeight, spectreWidth);
+            DrawMatrix(PICTURE_SHUM, interpolatePicture, spectreHeight, spectreWidth);
 
 
             labelWidth.Text = interpolatePicture.GetLength(0).ToString();
             labelHeight.Text = interpolatePicture.GetLength(1).ToString();
+            btnCreateSpectre.Enabled = true;
 
         }
 
@@ -279,6 +489,7 @@ namespace Spectrum2D
             }
 
             DrawMatrix(SPECTR, ConvertToDraw(spectreToDraw, spectreHeight, spectreWidth), spectreHeight, spectreWidth);
+            btnFilter.Enabled = true;
         }
 
         /// <summary>
@@ -292,13 +503,13 @@ namespace Spectrum2D
             return rand.NextDouble() * (maximum - minimum) + minimum;
         }
 
-        private double[,] SetNoise(int width, int height, double[,] pic, double percent)
+        private double[,] SetNoise(int width, int height, double[,] pic, double percent) //функция наложения шума
         {
-            double[,] result = new double[width, height];
-            double[,] noise = new double[width, height];
+            double[,] result = new double[width, height]; //результат наложения шума на картинку
+            double[,] noise = new double[width, height];//матрица шумовой компоненты
 
             // создание шума
-            double temp;
+            double temp; 
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)

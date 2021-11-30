@@ -34,22 +34,22 @@ namespace Spectrum2D
             this.SPECTR = new System.Windows.Forms.PictureBox();
             this.RESTOR_IMAGE = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.NUM_GAUS = new System.Windows.Forms.TextBox();
-            this.AMP1_GAUS = new System.Windows.Forms.TextBox();
-            this.AMP2_GAUS = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.DISP2_GAUS = new System.Windows.Forms.TextBox();
             this.DISP1_GAUS = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.AMP2_GAUS = new System.Windows.Forms.TextBox();
+            this.AMP1_GAUS = new System.Windows.Forms.TextBox();
+            this.NUM_GAUS = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.labelHeight = new System.Windows.Forms.Label();
@@ -71,9 +71,11 @@ namespace Spectrum2D
             this.btnSetNoise = new System.Windows.Forms.Button();
             this.btnStretch = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chkLog = new System.Windows.Forms.CheckBox();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnCreateSpectre = new System.Windows.Forms.Button();
-            this.chkLog = new System.Windows.Forms.CheckBox();
+            this.labelSKO = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PICTURE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PICTURE_SHUM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SPECTR)).BeginInit();
@@ -150,59 +152,50 @@ namespace Spectrum2D
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Гауссовы купола";
             // 
-            // label1
+            // label10
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Кол-во:";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(256, 98);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(24, 17);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "до";
             // 
-            // label2
+            // label11
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Амплитуда:";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(171, 98);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(23, 17);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "от";
             // 
-            // label3
+            // DISP2_GAUS
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 98);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Дисперсия:";
+            this.DISP2_GAUS.Location = new System.Drawing.Point(287, 95);
+            this.DISP2_GAUS.Name = "DISP2_GAUS";
+            this.DISP2_GAUS.Size = new System.Drawing.Size(46, 23);
+            this.DISP2_GAUS.TabIndex = 9;
+            this.DISP2_GAUS.Text = "5";
+            this.DISP2_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // NUM_GAUS
+            // DISP1_GAUS
             // 
-            this.NUM_GAUS.Location = new System.Drawing.Point(202, 21);
-            this.NUM_GAUS.Name = "NUM_GAUS";
-            this.NUM_GAUS.Size = new System.Drawing.Size(131, 23);
-            this.NUM_GAUS.TabIndex = 3;
-            this.NUM_GAUS.Text = "10";
-            this.NUM_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DISP1_GAUS.Location = new System.Drawing.Point(202, 95);
+            this.DISP1_GAUS.Name = "DISP1_GAUS";
+            this.DISP1_GAUS.Size = new System.Drawing.Size(46, 23);
+            this.DISP1_GAUS.TabIndex = 8;
+            this.DISP1_GAUS.Text = "1";
+            this.DISP1_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // AMP1_GAUS
+            // label5
             // 
-            this.AMP1_GAUS.Location = new System.Drawing.Point(202, 61);
-            this.AMP1_GAUS.Name = "AMP1_GAUS";
-            this.AMP1_GAUS.Size = new System.Drawing.Size(46, 23);
-            this.AMP1_GAUS.TabIndex = 4;
-            this.AMP1_GAUS.Text = "1";
-            this.AMP1_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // AMP2_GAUS
-            // 
-            this.AMP2_GAUS.Location = new System.Drawing.Point(286, 61);
-            this.AMP2_GAUS.Name = "AMP2_GAUS";
-            this.AMP2_GAUS.Size = new System.Drawing.Size(46, 23);
-            this.AMP2_GAUS.TabIndex = 5;
-            this.AMP2_GAUS.Text = "5";
-            this.AMP2_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(256, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(24, 17);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "до";
             // 
             // label4
             // 
@@ -213,14 +206,59 @@ namespace Spectrum2D
             this.label4.TabIndex = 6;
             this.label4.Text = "от";
             // 
-            // label5
+            // AMP2_GAUS
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(256, 64);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(24, 17);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "до";
+            this.AMP2_GAUS.Location = new System.Drawing.Point(286, 61);
+            this.AMP2_GAUS.Name = "AMP2_GAUS";
+            this.AMP2_GAUS.Size = new System.Drawing.Size(46, 23);
+            this.AMP2_GAUS.TabIndex = 5;
+            this.AMP2_GAUS.Text = "5";
+            this.AMP2_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // AMP1_GAUS
+            // 
+            this.AMP1_GAUS.Location = new System.Drawing.Point(202, 61);
+            this.AMP1_GAUS.Name = "AMP1_GAUS";
+            this.AMP1_GAUS.Size = new System.Drawing.Size(46, 23);
+            this.AMP1_GAUS.TabIndex = 4;
+            this.AMP1_GAUS.Text = "1";
+            this.AMP1_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // NUM_GAUS
+            // 
+            this.NUM_GAUS.Location = new System.Drawing.Point(202, 21);
+            this.NUM_GAUS.Name = "NUM_GAUS";
+            this.NUM_GAUS.Size = new System.Drawing.Size(131, 23);
+            this.NUM_GAUS.TabIndex = 3;
+            this.NUM_GAUS.Text = "40";
+            this.NUM_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Дисперсия:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Амплитуда:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Кол-во:";
             // 
             // label6
             // 
@@ -270,42 +308,6 @@ namespace Spectrum2D
             this.label9.TabIndex = 8;
             this.label9.Text = "Восстановленное изображение";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(256, 98);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(24, 17);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "до";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(171, 98);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(23, 17);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "от";
-            // 
-            // DISP2_GAUS
-            // 
-            this.DISP2_GAUS.Location = new System.Drawing.Point(287, 95);
-            this.DISP2_GAUS.Name = "DISP2_GAUS";
-            this.DISP2_GAUS.Size = new System.Drawing.Size(46, 23);
-            this.DISP2_GAUS.TabIndex = 9;
-            this.DISP2_GAUS.Text = "5";
-            this.DISP2_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // DISP1_GAUS
-            // 
-            this.DISP1_GAUS.Location = new System.Drawing.Point(202, 95);
-            this.DISP1_GAUS.Name = "DISP1_GAUS";
-            this.DISP1_GAUS.Size = new System.Drawing.Size(46, 23);
-            this.DISP1_GAUS.TabIndex = 8;
-            this.DISP1_GAUS.Text = "1";
-            this.DISP1_GAUS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -349,7 +351,7 @@ namespace Spectrum2D
             this.txtWidth.Name = "txtWidth";
             this.txtWidth.Size = new System.Drawing.Size(53, 23);
             this.txtWidth.TabIndex = 12;
-            this.txtWidth.Text = "142";
+            this.txtWidth.Text = "223";
             this.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelWidth
@@ -377,7 +379,7 @@ namespace Spectrum2D
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.Size = new System.Drawing.Size(53, 23);
             this.txtHeight.TabIndex = 14;
-            this.txtHeight.Text = "128";
+            this.txtHeight.Text = "100";
             this.txtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox3
@@ -456,6 +458,7 @@ namespace Spectrum2D
             this.btnUpload.TabIndex = 25;
             this.btnUpload.Text = "Загрузить изображение";
             this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // radioUpload
             // 
@@ -468,6 +471,7 @@ namespace Spectrum2D
             this.radioUpload.Text = "Загрузить";
             this.radioUpload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioUpload.UseVisualStyleBackColor = true;
+            this.radioUpload.CheckedChanged += new System.EventHandler(this.radioUpload_CheckedChanged);
             // 
             // radioCreate
             // 
@@ -480,6 +484,7 @@ namespace Spectrum2D
             this.radioCreate.Text = "Создать";
             this.radioCreate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioCreate.UseVisualStyleBackColor = true;
+            this.radioCreate.CheckedChanged += new System.EventHandler(this.radioCreate_CheckedChanged);
             // 
             // btnInitial
             // 
@@ -505,6 +510,7 @@ namespace Spectrum2D
             // 
             // btnSetNoise
             // 
+            this.btnSetNoise.Enabled = false;
             this.btnSetNoise.Location = new System.Drawing.Point(12, 21);
             this.btnSetNoise.Name = "btnSetNoise";
             this.btnSetNoise.Size = new System.Drawing.Size(173, 49);
@@ -515,6 +521,7 @@ namespace Spectrum2D
             // 
             // btnStretch
             // 
+            this.btnStretch.Enabled = false;
             this.btnStretch.Location = new System.Drawing.Point(202, 21);
             this.btnStretch.Name = "btnStretch";
             this.btnStretch.Size = new System.Drawing.Size(173, 49);
@@ -537,26 +544,6 @@ namespace Spectrum2D
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Фильтрация";
             // 
-            // btnFilter
-            // 
-            this.btnFilter.Enabled = false;
-            this.btnFilter.Location = new System.Drawing.Point(202, 33);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(173, 49);
-            this.btnFilter.TabIndex = 17;
-            this.btnFilter.Text = "Фильтровать";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            // 
-            // btnCreateSpectre
-            // 
-            this.btnCreateSpectre.Location = new System.Drawing.Point(12, 33);
-            this.btnCreateSpectre.Name = "btnCreateSpectre";
-            this.btnCreateSpectre.Size = new System.Drawing.Size(173, 49);
-            this.btnCreateSpectre.TabIndex = 16;
-            this.btnCreateSpectre.Text = "Создать спектр";
-            this.btnCreateSpectre.UseVisualStyleBackColor = true;
-            this.btnCreateSpectre.Click += new System.EventHandler(this.btnCreateSpectre_Click);
-            // 
             // chkLog
             // 
             this.chkLog.Location = new System.Drawing.Point(12, 100);
@@ -568,12 +555,56 @@ namespace Spectrum2D
             this.chkLog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkLog.UseVisualStyleBackColor = true;
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Enabled = false;
+            this.btnFilter.Location = new System.Drawing.Point(202, 33);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(173, 49);
+            this.btnFilter.TabIndex = 17;
+            this.btnFilter.Text = "Фильтровать";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // btnCreateSpectre
+            // 
+            this.btnCreateSpectre.Enabled = false;
+            this.btnCreateSpectre.Location = new System.Drawing.Point(12, 33);
+            this.btnCreateSpectre.Name = "btnCreateSpectre";
+            this.btnCreateSpectre.Size = new System.Drawing.Size(173, 49);
+            this.btnCreateSpectre.TabIndex = 16;
+            this.btnCreateSpectre.Text = "Создать спектр";
+            this.btnCreateSpectre.UseVisualStyleBackColor = true;
+            this.btnCreateSpectre.Click += new System.EventHandler(this.btnCreateSpectre_Click);
+            // 
+            // labelSKO
+            // 
+            this.labelSKO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelSKO.Location = new System.Drawing.Point(1185, 666);
+            this.labelSKO.Name = "labelSKO";
+            this.labelSKO.Size = new System.Drawing.Size(133, 23);
+            this.labelSKO.TabIndex = 29;
+            this.labelSKO.Text = "0";
+            this.labelSKO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.label16.Location = new System.Drawing.Point(1103, 669);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(70, 17);
+            this.label16.TabIndex = 30;
+            this.label16.Text = "Невязка";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1466, 953);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.labelSKO);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox4);
@@ -658,6 +689,8 @@ namespace Spectrum2D
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnCreateSpectre;
         private System.Windows.Forms.CheckBox chkLog;
+        private System.Windows.Forms.Label labelSKO;
+        private System.Windows.Forms.Label label16;
     }
 }
 
